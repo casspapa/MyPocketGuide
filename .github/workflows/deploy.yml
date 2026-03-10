@@ -1,0 +1,54 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REGION: us-central1
+  SERVICE_NAME: museum-tour-guide
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write   # Required for Workload Identity Federation
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Cloud Run
+        env:
+          GCP_PROJECT:          ${{ secrets.GCP_PROJECT }}
+          CLOUDSQL_INSTANCE:    ${{ secrets.CLOUDSQL_INSTANCE }}
+          DB_USER:              ${{ secrets.DB_USER }}
+          DB_PASS:              ${{ secrets.DB_PASS }}
+          DB_NAME:              ${{ secrets.DB_NAME }}
+          RAG_CORPUS:           ${{ secrets.RAG_CORPUS }}
+          RECAPTCHA_SITE_KEY:   ${{ secrets.RECAPTCHA_SITE_KEY }}
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          REGION:               ${{ env.REGION }}
+          SERVICE_NAME:         ${{ env.SERVICE_NAME }}
+        run: |
+          chmod +x ./deploy.sh
+          ./deploy.sh
+
+      - name: Output service URL
+        run: |
+          echo "🚀 Deployed to:"
+          gcloud run services describe ${{ env.SERVICE_NAME }} \
+            --region ${{ env.REGION }} \
+            --project ${{ secrets.GCP_PROJECT }} \
+            --format 'value(status.url)'

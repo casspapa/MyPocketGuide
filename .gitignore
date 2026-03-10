@@ -1,0 +1,28 @@
+# Security / Secrets
+.env
+
+# Virtual Environments
+venv312/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Testing Cache
+.pytest_cache/
+
+# Local Tooling Cache
+.adk/deploy.sh
+
+# Environment example (keep, but just in case)
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test outputs
+.coverage
+htmlcov/
+tests/
