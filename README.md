@@ -15,10 +15,9 @@
 
 ## 📹 Demo Video
 
-> <!-- PLACEHOLDER: Replace with your YouTube/Vimeo link before submission -->
 > **[🎬 Watch the demo →](https://PLACEHOLDER_VIDEO_LINK)**
 >
-> _4-minute walkthrough showing the live agent in action — real multimodal interaction, no mockups._
+> _4-minute walkthrough showing the live agent in action. Real multimodal interaction, no mockups._
 
 ---
 
@@ -28,43 +27,37 @@ My Pocket Guide solves two problems, from two perspectives.
 
 ### For Museums: Engagement is falling and they're flying blind
 
-Museums are facing a quiet crisis. Speaking with people across the industry, the same challenge keeps coming up: **keeping visitors engaged and getting them to come back**. The core issue isn't the collections — they're extraordinary. It's that museums have almost no way to understand what individual visitors actually care about. Every person gets the same placard, the same audio guide, the same one-size-fits-all experience. There's no feedback loop, no personalisation, and no data on what actually resonated. Museums want to make their visitors feel something personal — but they don't have the tools to do it at scale, and they can't justify rebuilding their entire visitor experience from the ground up.
+Museums are facing a quiet crisis. Speaking with people across the industry, the same challenge keeps coming up: **keeping visitors engaged and getting them to come back**. The core issue isn't the collections. It's that museums have almost no way to understand what individual visitors actually care about. Every person gets the same placard, the same audio guide, the same one-size-fits-all experience. There's no feedback loop and no data on what actually resonated. Museums want to make their visitors feel something personal, but they don't have the tools to do it at scale, and they can't justify rebuilding their entire visitor experience from the ground up.
 
 ### For Visitors: The experience doesn't meet them where they are
 
-On the other side, visitors are quietly disengaging. A ten-year-old gamer and a marine biologist walk past the same exhibit and read the same paragraph — neither feels like the museum was made for them. The information is there, but it's locked behind dense placards written for an academic audience, or generic audio guides that drone through the same script for everyone. For many visitors — especially younger ones — the gap between what they care about and how the exhibit is presented is just too wide. They don't lack curiosity; they lack a way in. And for visitors who don't speak the language fluently, or who feel intimidated by the formality of a museum setting, that barrier is even higher. The result is the same: people drift through rooms, glance at things, and leave without a story to tell anyone.
+On the other side, visitors are quietly disengaging. A ten-year-old gamer and a marine biologist walk past the same exhibit and read the same paragraph. Neither feels like the museum was made for them. The information is there, but it's locked behind dense placards written for an academic audience, or generic audio guides that drone through the same script for everyone. For many visitors, especially younger ones, the gap between what they care about and how the exhibit is presented is just too wide. The curiosity is there. The way in isn't. And for visitors who don't speak the language fluently, or who feel intimidated by the formality of a museum setting, that barrier is even higher. People drift through rooms, glance at things, and leave without a story to tell anyone.
 
 ## 💡 The Solution
 
-My Pocket Guide gives museums an AI-powered personal tour guide that works with their **existing collection** — no new hardware, no exhibit redesign, no app download required. Visitors open a web page on their phone, have a short voice conversation about who they are and what they're into, then point their camera at any exhibit and get a live, spoken narration that connects that exhibit to *their* world.
+My Pocket Guide gives museums an AI-powered personal tour guide that works with their **existing collection**, with no new hardware, no exhibit redesign, and no app download. Visitors open a web page on their phone, have a short voice conversation about who they are and what they're into, then point their camera at any exhibit and get a live, spoken narration that connects that exhibit to *their* world.
 
-**For the visitor**, the experience finally meets them where they are. A visitor who loves football hears about the aerodynamics of a blue whale's dive compared to a striker's run. A geology student hears about the mineral composition of the Willamette Meteorite. Someone who's never been to a museum before gets a guide that speaks naturally, invites questions, and makes the unfamiliar feel personal. Same exhibit, completely different story — delivered in real time by voice, not text. No reading required, no prior knowledge assumed.
+**For the visitor**, it actually works the way you'd want it to. A visitor who loves football hears about the aerodynamics of a blue whale's dive compared to a striker's run. A geology student hears about the mineral composition of the Willamette Meteorite. Someone who's never been to a museum before gets a guide that speaks naturally, invites questions, and makes the unfamiliar feel personal. Same exhibit, completely different story, delivered in real time by voice, not text. No reading required, no prior knowledge assumed.
 
-**For the museum**, the immediate uplift is a dramatically more engaging visitor experience using the collection they already have. Beyond the hackathon build, the architecture is designed so museums can start understanding their visitors for the first time: which exhibits got the most interaction, how many questions people asked, whether they saved photos — feeding real analytics back to curators and giving them the data they've never had to inform programming, exhibit design, and outreach.
+**For the museum**, visitors get a more engaging experience using the collection they already have. Beyond the hackathon build, the architecture is designed so museums can start understanding their visitors for the first time: which exhibits got the most interaction, how many questions people asked, whether they saved photos. That data feeds back to curators and gives them something they've never had to inform programming and exhibit design.
 
 ---
 
 ## ✨ Key Features
 
-**Beyond the text box — this is what makes it a Live Agent:**
+**Beyond the text box, this is what makes it a Live Agent:**
 
-- **Dual-persona multi-agent system**: Charon (the concierge) collects your profile through natural conversation, then hands off to Puck (the tour guide) with a different voice and personality. Two distinct agents, seamless transition.
-- **Native multimodal vision**: Point your phone camera at any exhibit. The agent sees it in real time via Gemini's built-in vision capabilities — no separate image classification API, no upload button. Camera frames stream at up to 1fps via `send_realtime()`.
+- **Dual-persona multi-agent system**: Charon (the concierge) collects your profile through natural conversation, then hands off to Puck (the tour guide) with a different voice and personality. Two distinct agents, smooth handoff.
+- **Native multimodal vision**: Point your phone camera at any exhibit. The agent sees it in real time via Gemini's built-in vision capabilities, no separate image classification API, no upload button. Camera frames stream at up to 1fps via `send_realtime()`.
 - **Barge-in and interruption**: This isn't turn-based. Interrupt the guide mid-sentence, ask a follow-up, change the subject. The Gemini Live API handles natural conversation flow with speech-to-speech.
-- **RAG-grounded knowledge**: Every exhibit narration is backed by a Vertex AI RAG corpus containing verified facts about all 16 exhibits. The agent doesn't hallucinate exhibit history — it retrieves it.
-- **Personalised lateral connections**: The concierge captures *specific* interests (not "I like science" — more like "I play bass guitar and I'm obsessed with Formula 1"). The tour guide uses these as raw material to build surprising, memorable connections between you and each exhibit.
+- **RAG-grounded knowledge**: Every exhibit narration is backed by a Vertex AI RAG corpus containing verified facts about all 16 exhibits. The agent doesn't hallucinate exhibit history, it retrieves it.
+- **Personalised lateral connections**: The concierge captures *specific* interests (not "I like science", more like "I play bass guitar and I'm obsessed with Formula 1"). The tour guide uses these to build surprising, memorable connections between you and each exhibit.
 - **Persistent sessions**: Cloud SQL PostgreSQL stores session state via ADK's `DatabaseSessionService`, so your profile and conversation history survive reconnections.
-- **Context window compression**: `ContextWindowCompressionConfig` summarises old context instead of hard-capping, enabling unlimited session duration — critical for a full museum visit.
+- **Context window compression**: `ContextWindowCompressionConfig` summarises old context instead of hard-capping, enabling unlimited session duration. This matters for a full museum visit.
 
 ---
 
 ## 🏗️ Architecture
-
-<!-- 
-  This Mermaid diagram renders natively on GitHub. 
-  It fulfils the hackathon requirement: "Include an Architecture Diagram 
-  showing a clear visual representation of your system."
--->
 
 ```mermaid
 flowchart TB
@@ -72,7 +65,7 @@ flowchart TB
         MIC[🎤 Microphone]
         CAM[📷 Camera]
         SPEAKER[🔊 Speaker]
-        UI[Web UI — index.html]
+        UI[Web UI]
     end
 
     subgraph GCR["☁️ Google Cloud Run (us-central1)"]
@@ -145,7 +138,7 @@ sequenceDiagram
     P->>G: Narrate with Alex's interests
     G-->>V: 🔊 "So Alex, you know how in hip-hop<br/>the beat drops and everything changes?<br/>That's what happens when this whale dives..."
     
-    V->>P: 🎤 "Wait — how deep can it actually go?"
+    V->>P: 🎤 "Wait, how deep can it actually go?"
     Note over V,G: Barge-in interruption handled naturally
     G-->>V: 🔊 Responds to question in real time
 ```
@@ -174,8 +167,8 @@ sequenceDiagram
 | Service | How It's Used |
 |---------|--------------|
 | **Cloud Run** | Hosts the FastAPI backend and serves the static frontend. Configured with `--timeout=3600` to support long-lived WebSocket connections for full museum visits. |
-| **Vertex AI — Gemini Live** | The bidi-streaming connection to `gemini-live-2.5-flash-native-audio` in `us-central1`. Handles simultaneous audio input, audio output, vision input, and text — all in a single persistent stream. |
-| **Vertex AI — RAG Engine** | Corpus of 16 exhibit markdown files in `us-west1`. Each exhibit file contains verified facts, scientific significance, history, and visual identification keywords. One-off lookups per exhibit — cross-region latency is acceptable for non-streaming calls. |
+| **Vertex AI, Gemini Live** | The bidi-streaming connection to `gemini-live-2.5-flash-native-audio` in `us-central1`. Handles simultaneous audio input, audio output, vision input, and text in a single persistent stream. |
+| **Vertex AI, RAG Engine** | Corpus of 16 exhibit markdown files in `us-west1`. Each exhibit file contains verified facts, scientific significance, history, and visual identification keywords. One-off lookups per exhibit, so cross-region latency is acceptable. |
 | **Cloud SQL (PostgreSQL)** | Stores ADK sessions and events via `DatabaseSessionService`. Enables session resumption and persistent visitor profiles across reconnections. |
 | **Artifact Registry** | Container image storage via `gcloud run deploy --source` (automatic Buildpacks). |
 
@@ -203,8 +196,8 @@ my-pocket-guide/
 │   ├── main.py                  # FastAPI app, WebSocket handler, ADK runner
 │   ├── agent.py                 # Root agent (concierge with sub_agents)
 │   └── agents/
-│       ├── concierge_agent.py   # Charon — profile collection + handoff
-│       └── tour_guide_agent.py  # Puck — vision + RAG narration
+│       ├── concierge_agent.py   # Charon, profile collection + handoff
+│       └── tour_guide_agent.py  # Puck, vision + RAG narration
 │   └── tools/
 │       ├── identify_tool.py     # Exhibit identification + state sync
 │       ├── rag_tool.py          # Vertex AI RAG search
@@ -224,7 +217,7 @@ my-pocket-guide/
 │   └── test_rag.py              # RAG integration tests
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml           # CI/CD — auto-deploy on push to main
+│       └── deploy.yml           # CI/CD, auto-deploy on push to main
 ├── Dockerfile
 ├── deploy.sh                    # Cloud Run deployment script
 ├── .env.example                 # Environment variable template
@@ -255,7 +248,7 @@ pip install -r requirements.txt
 
 ```bash
 cp .env.example .env
-# Edit .env with your values — see comments in the file
+# Edit .env with your values, see comments in the file
 ```
 
 ### 3. Set up Cloud SQL
@@ -304,9 +297,7 @@ The script will print the service URL when complete.
 
 ## 🔄 Automated Deployment (CI/CD)
 
-Deployment is automated via GitHub Actions — pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and deploys to Cloud Run automatically.
-
-The deployment script (`deploy.sh`) and the GitHub Actions workflow together provide **infrastructure-as-code deployment automation**.
+Deployment is automated via GitHub Actions. Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and deploys to Cloud Run automatically.
 
 **Required GitHub Secrets:**
 
@@ -323,25 +314,26 @@ The deployment script (`deploy.sh`) and the GitHub Actions workflow together pro
 
 ## 🔬 Design Decisions & Architecture Notes
 
-- **Region co-location for bidi-streaming**: Cloud Run and Cloud SQL are both in `us-central1` to co-locate with the Gemini Live endpoint. The continuous bidi-streaming connection is far more latency-sensitive than a one-off RAG lookup, so the RAG corpus stays in `us-west1` where it was created — cross-region cost is acceptable for non-streaming calls.
-- **Native vision over custom streaming tools**: Camera frames are sent as `send_realtime(Blob(mime_type="image/jpeg"))` — this uses the model's built-in multimodal capabilities instead of building a separate Type 2 streaming tool, which is incompatible with the Live API architecture.
-- **Independent tools, not dependency chains**: `identify_exhibit` (state sync) and `rag_search` (knowledge retrieval) are intentionally independent. A failed identification never silently skips a RAG lookup — the agent can still search by what it sees.
+- **Region co-location for bidi-streaming**: Cloud Run and Cloud SQL are both in `us-central1` to co-locate with the Gemini Live endpoint. The continuous bidi-streaming connection is far more latency-sensitive than a one-off RAG lookup, so the RAG corpus stays in `us-west1` where it was created. Cross-region cost is acceptable for non-streaming calls.
+- **Native vision over custom streaming tools**: Camera frames are sent as `send_realtime(Blob(mime_type="image/jpeg"))`. This uses the model's built-in multimodal capabilities instead of building a separate Type 2 streaming tool, which is incompatible with the Live API architecture.
+- **Independent tools, not dependency chains**: `identify_exhibit` (state sync) and `rag_search` (knowledge retrieval) are intentionally independent. A failed identification never silently skips a RAG lookup. The agent can still search by what it sees.
 - **Descriptive prompt philosophy**: The tour guide prompt describes the *quality and style* of personalised connections rather than giving examples, which would constrain the model's creative thinking.
 
 ---
 
 ## 📝 Findings & Learnings
 
-<!-- PLACEHOLDER: Write up your key technical learnings before submission. Topics to cover:
-- Region co-location lesson (cross-region latency on bidi-streaming)
-- Audio resource lifecycle (AudioContext zombie cleanup)
-- Binary vs text WebSocket frame handling
-- Personalisation quality over quantity (specific interests > vague ones)
-- Puck voice vs Fenrir voice (browser compatibility)
-- Session management (sessionStorage vs crypto.randomUUID proliferation)
--->
+**Intuitive Multimodal UX Requires Constant Feedback**
 
-> _Coming soon — technical write-up of key learnings from building a real-time multimodal agent._
+When I tested the app with other people, nobody could tell what was happening. Is the agent listening? Are camera frames being sent? Is silence thinking or a crash? I added a listening strip with a waveform, a "Streaming" pill over the camera, and an orb that shifts between idle, listening, and speaking states. In a live voice+vision interface, the UI's main job is answering one question: "is this thing on?"
+
+**Browser Audio Constraints on Mobile**
+
+Chrome on Android ignores the 16kHz sample rate you request when creating an AudioContext and quietly records at the device's native rate, usually 48kHz. Send that raw PCM to the Gemini Live API and you get garbled, pitch-shifted audio with no error to explain why. The fix: detect the actual `AudioContext.sampleRate` at runtime and downsample in the AudioWorklet before sending. This only shows up on real phones, not desktop emulators.
+
+**Grounding Documents Need Visual Context, Not Just Facts**
+
+My RAG corpus started with only historical and scientific content for each exhibit. Good for narration, useless for helping the agent figure out what it was looking at through the camera. I added `## Visual Identification` sections to every markdown file with keywords, common visitor names ("the big thumb", "the whale skeleton"), and physical descriptions like size, colour, and material. Exhibit recognition went from coin-flip to reliable.
 
 ---
 
@@ -365,50 +357,35 @@ No third-party datasets or content were used. All 16 exhibit markdown files are 
 
 ## ☁️ Proof of Google Cloud Deployment
 
-<!-- PLACEHOLDER: Before submission, add one of:
-  1. A link to a short screen recording showing the Cloud Run console with the 
-     service running (e.g. Loom, YouTube unlisted)
-  2. A link to a specific code file demonstrating Google Cloud API usage, e.g.:
-     - backend/main.py (Cloud SQL connection via DatabaseSessionService)
-     - backend/tools/rag_tool.py (Vertex AI RAG API calls)
-     - deploy.sh (gcloud run deploy command)
--->
+### [Try it live → museum-tour-guide-912042965719.us-central1.run.app](https://museum-tour-guide-912042965719.us-central1.run.app)
 
-> **[📋 Deployment Proof →](https://PLACEHOLDER_DEPLOYMENT_PROOF_LINK)**
+For a walkthrough of the Cloud Run service, Cloud SQL instance, and Vertex AI RAG corpus running in the Google Cloud Console, see the [deployment proof recording](PLACEHOLDER_RECORDING_LINK).
 
 Key files demonstrating Google Cloud integration:
-- [`deploy.sh`](deploy.sh) — Cloud Run deployment with Cloud SQL integration
-- [`backend/tools/rag_tool.py`](backend/tools/rag_tool.py) — Vertex AI RAG Engine API calls
-- [`backend/main.py`](backend/main.py) — Cloud SQL `DatabaseSessionService` for ADK session persistence
-- [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) — Automated CI/CD to Cloud Run
+- [`deploy.sh`](deploy.sh) - Cloud Run deployment with Cloud SQL integration
+- [`backend/main.py`](backend/main.py) - Cloud SQL `DatabaseSessionService` for ADK session persistence
+- [`backend/tools/rag_tool.py`](backend/tools/rag_tool.py) - Vertex AI RAG Engine API calls
+- [`backend/tools/identify_tool.py`](backend/tools/identify_tool.py) - Exhibit identification with session state sync
+- [`scripts/ingest.py`](scripts/ingest.py) - Vertex AI RAG corpus ingestion script
+- [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) - Automated CI/CD to Cloud Run
 
 ---
 
 ## 🏆 Bonus Contributions
 
-<!-- PLACEHOLDER: Fill in before submission for up to +1.0 bonus points -->
-
 ### Published Content (+0.6 pts max)
 
-> <!-- Add links to blog posts, videos, or podcasts about how the project was built.
-     Must include: "This content was created for the purposes of entering the 
-     Gemini Live Agent Challenge hackathon."
-     Share on social media with #GeminiLiveAgentChallenge -->
->
 > _Coming soon._
 
 ### Automated Cloud Deployment (+0.2 pts)
 
-✅ **Included in this repository:**
-- [`deploy.sh`](deploy.sh) — Shell script for automated Cloud Run deployment
-- [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) — GitHub Actions CI/CD pipeline triggered on push to `main`
+Deployment is fully automated. Pushing to `main` triggers a GitHub Actions pipeline that builds and deploys to Cloud Run without manual intervention.
+- [`deploy.sh`](deploy.sh) - Shell script for Cloud Run deployment with Cloud SQL connection
+- [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) - GitHub Actions CI/CD pipeline
 
 ### Google Developer Group Membership (+0.2 pts)
 
-> <!-- Add your public GDG community profile link here.
-     Sign up at: https://developers.google.com/community/gdg -->
->
-> _PLACEHOLDER: Add GDG profile link._
+> [g.dev/casspapadopoulos](https://g.dev/casspapadopoulos)
 
 ---
 
