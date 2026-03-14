@@ -359,7 +359,7 @@ No third-party datasets or content were used. All 16 exhibit markdown files are 
 
 ### [Try it live → museum-tour-guide-912042965719.us-central1.run.app](https://museum-tour-guide-912042965719.us-central1.run.app)
 
-For a walkthrough of the Cloud Run service, Cloud SQL instance, and Vertex AI RAG corpus running in the Google Cloud Console, see the [deployment proof recording](PLACEHOLDER_RECORDING_LINK).
+For a walkthrough of the Cloud Run service, Cloud SQL instance, and Vertex AI RAG corpus running in the Google Cloud Console, see the [deployment proof recording](https://github.com/casspapa/MyPocketGuide/blob/main/hackathon-submission-items/deployment-evidence.mp4).
 
 Key files demonstrating Google Cloud integration:
 - [`deploy.sh`](deploy.sh) - Cloud Run deployment with Cloud SQL integration
