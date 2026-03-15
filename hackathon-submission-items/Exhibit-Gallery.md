@@ -40,7 +40,7 @@ Open this page on a screen, then point your phone camera at any image to test th
 ## 🚀 Beyond the Horizon — Space & Cosmos
 
 ### The Willamette Meteorite
-![Willamette Meteorite](https://upload.wikimedia.org/wikipedia/commons/8/84/At_American_Museum_of_Natural_History_2024_005.jpg)
+![Willamette Meteorite](https://upload.wikimedia.org/wikipedia/commons/c/cc/Willamette_Meteorite_AMNH.jpg)
 
 ### Apollo 11 Command Module
 ![Apollo 11](https://upload.wikimedia.org/wikipedia/commons/7/72/Columbia_Command_Module_On_Display_2024.jpg)
