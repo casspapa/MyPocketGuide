@@ -11,7 +11,7 @@ Open this page on a screen, then point your phone camera at any image to test th
 ## 🦕 Echoes of the Deep — Prehistoric Earth
 
 ### Hope the Blue Whale
-![Hope the Blue Whale](https://commons.wikimedia.org/wiki/File:Blue_Whale_-_Natural_History_Museum,_London_-_Joy_of_Museums.jpg#/media/File:Blue_Whale_-_Natural_History_Museum,_London_-_Joy_of_Museums.jpg)
+![Hope the Blue Whale](https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Blue_Whale_-_Natural_History_Museum%2C_London_-_Joy_of_Museums.jpg/960px-Blue_Whale_-_Natural_History_Museum%2C_London_-_Joy_of_Museums.jpg?_=20180908022400)
 
 ### Dippy the Diplodocus
 ![Dippy the Diplodocus](https://commons.wikimedia.org/wiki/File:CM_Diplodocus.jpg#/media/File:CM_Diplodocus.jpg)
