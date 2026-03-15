@@ -17,9 +17,9 @@
 
 **[🎬 Watch the demo](https://www.youtube.com/watch?v=3RGetWi89Ak)**
 
-> [0:00](https://www.youtube.com/watch?v=3RGetWi89Ak) What's Ahead
-> [0:08](https://www.youtube.com/watch?v=3RGetWi89Ak&t=8s) The Vision
-> [0:55](https://www.youtube.com/watch?v=3RGetWi89Ak&t=55s) Why it Matters
+> [0:00](https://www.youtube.com/watch?v=3RGetWi89Ak) What's Ahead  
+> [0:08](https://www.youtube.com/watch?v=3RGetWi89Ak&t=8s) The Vision  
+> [0:55](https://www.youtube.com/watch?v=3RGetWi89Ak&t=55s) Why it Matters  
 > [1:45](https://www.youtube.com/watch?v=3RGetWi89Ak&t=105s) Live Demo
 
 ---
@@ -65,9 +65,10 @@ My Pocket Guide gives museums an AI-powered personal tour guide that works with 
 ```mermaid
 flowchart TD
     subgraph VISITOR["📱 Visitor's Phone"]
-        MIC["🎤 Mic"] --> UI["🌐 Web UI"]
-        CAM["📷 Camera"] --> UI
-        UI --> SPEAKER["🔊 Speaker"]
+        MIC["🎤 Mic"]
+        UI["🌐 Web UI"]
+        CAM["📷 Camera"]
+        SPEAKER["🔊 Speaker"]
     end
 
     UI <-->|"WebSocket bidi-stream"| FASTAPI
