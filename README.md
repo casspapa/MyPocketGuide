@@ -24,6 +24,16 @@
 
 ---
 
+## 🎧 Try It Live
+
+**[→ Open My Pocket Guide](https://museum-tour-guide-912042965719.us-central1.run.app)**
+
+Open the link on your phone (Chrome recommended). Allow microphone and camera access when prompted. The concierge will greet you by voice. Tell it your name and a few specific interests, then switch to the camera view and point it at one of the exhibit images in the Galleries section below. Works best in a quiet environment with headphones.
+
+You're not limited to exhibits either. Point the camera at your dog, your coffee mug, or anything around you and ask Puck what it sees. The vision works on anything, the RAG grounding only kicks in when it recognises a known exhibit.
+
+---
+
 ## 🧩 The Problem
 
 My Pocket Guide solves two problems, from two perspectives.
@@ -53,7 +63,7 @@ My Pocket Guide gives museums an AI-powered personal tour guide that works with 
 - **Dual-persona multi-agent system**: Charon (the concierge) collects your profile through natural conversation, then hands off to Puck (the tour guide) with a different voice and personality. Two distinct agents, smooth handoff.
 - **Native multimodal vision**: Point your phone camera at any exhibit. The agent sees it in real time via Gemini's built-in vision capabilities, no separate image classification API, no upload button. Camera frames stream at up to 1fps via `send_realtime()`.
 - **Barge-in and interruption**: This isn't turn-based. Interrupt the guide mid-sentence, ask a follow-up, change the subject. The Gemini Live API handles natural conversation flow with speech-to-speech.
-- **RAG-grounded knowledge**: Every exhibit narration is backed by a Vertex AI RAG corpus containing verified facts about all 16 exhibits. The agent doesn't hallucinate exhibit history, it retrieves it.
+- **RAG-grounded knowledge**: Every exhibit narration is backed by a Vertex AI RAG corpus containing verified facts about all 17 exhibits. The agent doesn't hallucinate exhibit history, it retrieves it.
 - **Personalised lateral connections**: The concierge captures *specific* interests (not "I like science", more like "I play bass guitar and I'm obsessed with Formula 1"). The tour guide uses these to build surprising, memorable connections between you and each exhibit.
 - **Persistent sessions**: Cloud SQL PostgreSQL stores session state via ADK's `DatabaseSessionService`, so your profile and conversation history survive reconnections.
 - **Context window compression**: `ContextWindowCompressionConfig` summarises old context instead of hard-capping, enabling unlimited session duration. This matters for a full museum visit.
@@ -158,7 +168,7 @@ sequenceDiagram
 | AI Agents | Google ADK (Agent Development Kit) | Multi-agent orchestration with handoff |
 | LLM / Audio | Gemini Live 2.5 Flash (`gemini-live-2.5-flash-native-audio`) | Real-time speech-to-speech with native audio |
 | Vision | Gemini native multimodal | Camera frame processing via `send_realtime(Blob)` |
-| Knowledge Base | Vertex AI RAG Engine | Grounded exhibit fact retrieval (16 exhibits) |
+| Knowledge Base | Vertex AI RAG Engine | Grounded exhibit fact retrieval (17 exhibits) |
 | Backend | FastAPI + WebSocket | Bidirectional streaming server |
 | Session Storage | Cloud SQL PostgreSQL | ADK `DatabaseSessionService` for persistence |
 | Deployment | Google Cloud Run (`us-central1`) | Serverless container hosting |
@@ -174,7 +184,7 @@ sequenceDiagram
 |---------|--------------|
 | **Cloud Run** | Hosts the FastAPI backend and serves the static frontend. Configured with `--timeout=3600` to support long-lived WebSocket connections for full museum visits. |
 | **Vertex AI, Gemini Live** | The bidi-streaming connection to `gemini-live-2.5-flash-native-audio` in `us-central1`. Handles simultaneous audio input, audio output, vision input, and text in a single persistent stream. |
-| **Vertex AI, RAG Engine** | Corpus of 16 exhibit markdown files in `us-west1`. Each exhibit file contains verified facts, scientific significance, history, and visual identification keywords. One-off lookups per exhibit, so cross-region latency is acceptable. |
+| **Vertex AI, RAG Engine** | Corpus of 17 exhibit markdown files in `us-west1`. Each exhibit file contains verified facts, scientific significance, history, and visual identification keywords. One-off lookups per exhibit, so cross-region latency is acceptable. |
 | **Cloud SQL (PostgreSQL)** | Stores ADK sessions and events via `DatabaseSessionService`. Enables session resumption and persistent visitor profiles across reconnections. |
 | **Artifact Registry** | Container image storage via `gcloud run deploy --source` (automatic Buildpacks). |
 
@@ -182,12 +192,12 @@ sequenceDiagram
 
 ## 🖼️ Galleries & Exhibits
 
-Five themed galleries with 16 canonical exhibits:
+Five themed galleries with 17 canonical exhibits:
 
 | Gallery | Theme | Exhibits |
 |---------|-------|----------|
 | 🦕 Echoes of the Deep | Prehistoric Earth | Hope the Blue Whale · Dippy the Diplodocus · The Coelacanth |
-| 🏛️ Marble & Myth | Ancient Greece | Caryatid of the Erechtheion · The Parthenon Frieze · The Antikythera Mechanism |
+| 🏛️ Marble & Myth | Ancient Greece | Caryatid of the Erechtheion · The Parthenon Frieze · The Antikythera Mechanism · Diana of Versailles |
 | 🚀 Beyond the Horizon | Space & Cosmos | The Willamette Meteorite · Apollo 11 Command Module · Hubble Space Telescope Replica |
 | 🦑 Abyss | Ocean | The Giant Squid Specimen · Megalodon Jaw Reconstruction · HMS Challenger Collection |
 | 🎨 Brushstrokes of Time | Art Through the Ages | The Mona Lisa · Trevi Fountain (Panini) · Andy Warhol's Marilyn Monroe · Really Good (Shrigley) |
@@ -214,7 +224,7 @@ my-pocket-guide/
 │       ├── audio-player.js      # AudioWorklet for PCM playback
 │       └── pcm-player-processor.js
 ├── data/
-│   └── exhibits/                # 16 exhibit markdown files (RAG source)
+│   └── exhibits/                # 17 exhibit markdown files (RAG source)
 ├── scripts/
 │   ├── ingest.py                # RAG corpus ingestion
 │   ├── dedup_rag.py             # Remove duplicate RAG files
@@ -274,7 +284,7 @@ gcloud sql users create museum_user --instance=museum-db --password=YOUR_PASSWOR
 ### 4. Ingest exhibit data into Vertex AI RAG
 
 ```bash
-# First run: creates corpus and ingests all 16 exhibit files
+# First run: creates corpus and ingests all 17 exhibit files
 python3 scripts/ingest.py
 
 # Copy the RAG_CORPUS value printed at the end into your .env
@@ -357,7 +367,7 @@ This project uses the following third-party tools and services, all in accordanc
 | [FastAPI](https://fastapi.tiangolo.com/) | Backend web framework | MIT |
 | [reCAPTCHA v3](https://developers.google.com/recaptcha) | Bot protection | Google ToS |
 
-No third-party datasets or content were used. All 16 exhibit markdown files are original content created for this project.
+No third-party datasets or content were used. All 17 exhibit markdown files are original content created for this project.
 
 ---
 
