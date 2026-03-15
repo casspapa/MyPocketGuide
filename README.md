@@ -405,6 +405,9 @@ Key files demonstrating Google Cloud integration:
 
 ## 🏆 Bonus Contributions
 
+## Publishing a Piece of Content
+[Museums Are Losing Their Visitors. I Built an AI Tour Guide to Win Them Back.](https://medium.com/@cass.p.papa/museums-are-losing-their-visitors-i-built-an-ai-tour-guide-to-win-them-back-82912cc46a6b)
+
 ### Automated Cloud Deployment
 
 Deployment is fully automated. Pushing to `main` triggers a GitHub Actions pipeline that builds and deploys to Cloud Run without manual intervention.
