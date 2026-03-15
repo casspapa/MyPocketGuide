@@ -27,7 +27,7 @@ Open this page on a screen, then point your phone camera at any image to test th
 ![Caryatid](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Cariatide_dall%27eretteo%2C_415_ac._02.JPG/500px-Cariatide_dall%27eretteo%2C_415_ac._02.JPG?_=20140302162230)
 
 ### The Parthenon Frieze
-![Parthenon Frieze]([https://commons.wikimedia.org/wiki/File:Parthenon_Frieze.JPG#/media/File:Parthenon_Frieze.JPG](https://upload.wikimedia.org/wikipedia/commons/b/b3/Parthenon_Frieze.JPG))
+![Parthenon Frieze](https://upload.wikimedia.org/wikipedia/commons/b/b3/Parthenon_Frieze.JPG)
 
 ### The Antikythera Mechanism
 ![Antikythera Mechanism](https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/NAMA_Machine_d%27Anticyth%C3%A8re_1.jpg/500px-NAMA_Machine_d%27Anticyth%C3%A8re_1.jpg)
