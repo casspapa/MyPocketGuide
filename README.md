@@ -114,7 +114,7 @@ flowchart TD
     end
 
     ADK <-->|"Bidi-streaming"| GEMINI
-    RAGTOOL -->|"Cross-region lookup"| RAG
+    RAGTOOL -->|"RAG Lookup"| RAG
     ADK <-->|"Sessions"| CLOUDSQL
 
     subgraph GCP["☁️ Google Cloud Platform"]
