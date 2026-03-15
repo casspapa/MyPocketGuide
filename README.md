@@ -1,6 +1,6 @@
 # 🏛️ My Pocket Guide
 
-> **A real-time, voice-and-vision AI tour guide that sees what you see, knows what you love, and tells you a story you'll actually remember.**
+> **Every person is unique, so every tour should be too. A personalised AI tour guide that sees what you see, listens to what you love, and tells you a story tailored for you.**
 
 ![Google ADK](https://img.shields.io/badge/Google_ADK-Agent_Development_Kit-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![Gemini Live](https://img.shields.io/badge/Gemini_Live-2.5_Flash_Native_Audio-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
@@ -15,9 +15,9 @@
 
 ## 📹 Demo Video
 
-> **[🎬 Watch the demo →](https://PLACEHOLDER_VIDEO_LINK)**
->
-> _4-minute walkthrough showing the live agent in action. Real multimodal interaction, no mockups._
+**[🎬 Watch the demo →](https://www.youtube.com/watch?v=3RGetWi89Ak)**
+
+[0:00](https://www.youtube.com/watch?v=3RGetWi89Ak) What's Ahead · [0:08](https://www.youtube.com/watch?v=3RGetWi89Ak&t=8s) The Vision · [0:55](https://www.youtube.com/watch?v=3RGetWi89Ak&t=55s) Why It Matters · [1:45](https://www.youtube.com/watch?v=3RGetWi89Ak&t=105s) Live Demo
 
 ---
 
@@ -60,52 +60,50 @@ My Pocket Guide gives museums an AI-powered personal tour guide that works with 
 ## 🏗️ Architecture
 
 ```mermaid
-flowchart TB
-    subgraph VISITOR["📱 Visitor's Phone (Browser)"]
-        MIC[🎤 Microphone]
-        CAM[📷 Camera]
-        SPEAKER[🔊 Speaker]
-        UI[Web UI]
+flowchart TD
+    subgraph VISITOR["📱 Visitor's Phone"]
+        direction LR
+        MIC["🎤 Mic"] --> UI["Web UI"]
+        CAM["📷 Camera"] --> UI
+        UI --> SPEAKER["🔊 Speaker"]
     end
 
-    subgraph GCR["☁️ Google Cloud Run (us-central1)"]
-        FASTAPI[FastAPI + WebSocket Server]
-        
+    subgraph GCR["☁️ Google Cloud Run · us-central1"]
+        FASTAPI["FastAPI + WebSocket Server"]
         subgraph ADK["Google ADK Runtime"]
-            CONCIERGE["🎭 Charon — Concierge Agent\n(root_agent)"]
-            TOURGUIDE[🧭 Puck — Tour Guide Agent]
+            direction TB
+            CONCIERGE["🎭 Charon\nConcierge · root_agent"]
+            CONCIERGE -->|"agent transfer"| TOURGUIDE["🧭 Puck\nTour Guide · sub_agent"]
         end
-        
         subgraph TOOLS["Agent Tools"]
-            PROFILE[save_visitor_profile]
-            IDENTIFY[identify_exhibit]
-            RAGTOOL[rag_search]
+            direction LR
+            PROFILE["save_visitor_profile"]
+            IDENTIFY["identify_exhibit"]
+            RAGTOOL["rag_search"]
         end
+        FASTAPI --> ADK
+        CONCIERGE -.->|uses| PROFILE
+        TOURGUIDE -.->|uses| IDENTIFY
+        TOURGUIDE -.->|uses| RAGTOOL
     end
 
-    subgraph GCP["Google Cloud Platform"]
-        GEMINI[🧠 Gemini Live 2.5 Flash\nus-central1\nNative Audio + Vision]
-        RAG[📚 Vertex AI RAG Engine\nus-west1\n16 Exhibit Files]
-        CLOUDSQL[(🗄️ Cloud SQL PostgreSQL\nus-central1\nSessions + Events)]
+    subgraph GCP["☁️ Google Cloud Platform"]
+        direction LR
+        GEMINI["🧠 Gemini Live 2.5 Flash\nus-central1\nAudio + Vision"]
+        RAG["📚 Vertex AI RAG\nus-west1\n16 Exhibit Files"]
+        CLOUDSQL[("🗄️ Cloud SQL\nus-central1\nSessions")]
     end
 
-    MIC -- "PCM audio (16kHz)" --> UI
-    CAM -- "JPEG frames (≤1fps)" --> UI
-    UI <-- "WebSocket bidi-stream" --> FASTAPI
-    FASTAPI <--> ADK
-    CONCIERGE -- "agent transfer\n(sub_agents)" --> TOURGUIDE
-    CONCIERGE -. uses .-> PROFILE
-    TOURGUIDE -. uses .-> IDENTIFY
-    TOURGUIDE -. uses .-> RAGTOOL
-    ADK <-- "Bidi-streaming\n(audio + vision + text)" --> GEMINI
-    RAGTOOL -- "Cross-region lookup" --> RAG
+    UI <-->|"WebSocket bidi-stream\nPCM audio + JPEG frames"| FASTAPI
+    ADK <-->|"Bidi-streaming\naudio + vision + text"| GEMINI
+    RAGTOOL -->|"Cross-region lookup"| RAG
     ADK <--> CLOUDSQL
-    FASTAPI -- "PCM audio out" --> UI
-    UI --> SPEAKER
 
-    style VISITOR fill:#E8F5E9,stroke:#2E7D32,stroke-width:2px
-    style GCR fill:#E3F2FD,stroke:#1565C0,stroke-width:2px
-    style GCP fill:#FFF3E0,stroke:#E65100,stroke-width:2px
+    style VISITOR fill:#E8F5E9,stroke:#2E7D32,stroke-width:2px,color:#1B5E20
+    style GCR fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#0D47A1
+    style GCP fill:#FFF3E0,stroke:#E65100,stroke-width:2px,color:#BF360C
+    style ADK fill:#FFFDE7,stroke:#F9A825,stroke-width:1px
+    style TOOLS fill:#FFFDE7,stroke:#F9A825,stroke-width:1px
     style GEMINI fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px
 ```
 
@@ -238,7 +236,7 @@ my-pocket-guide/
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/cass-p-papa/my-pocket-guide.git
+git clone https://github.com/casspapa/my-pocket-guide.git
 cd my-pocket-guide
 python -m venv venv312 && source venv312/bin/activate
 pip install -r requirements.txt
@@ -359,7 +357,7 @@ No third-party datasets or content were used. All 16 exhibit markdown files are 
 
 ### [Try it live → museum-tour-guide-912042965719.us-central1.run.app](https://museum-tour-guide-912042965719.us-central1.run.app)
 
-For a walkthrough of the Cloud Run service, Cloud SQL instance, and Vertex AI RAG corpus running in the Google Cloud Console, see the [deployment proof recording](https://github.com/casspapa/MyPocketGuide/blob/main/hackathon-submission-items/deployment-evidence.mp4).
+For a walkthrough of the Cloud Run service, Cloud SQL instance, and Vertex AI RAG corpus running in the Google Cloud Console, see the [deployment proof recording](PLACEHOLDER_RECORDING_LINK).
 
 Key files demonstrating Google Cloud integration:
 - [`deploy.sh`](deploy.sh) - Cloud Run deployment with Cloud SQL integration
@@ -373,17 +371,13 @@ Key files demonstrating Google Cloud integration:
 
 ## 🏆 Bonus Contributions
 
-### Published Content (+0.6 pts max)
-
-> _Coming soon._
-
-### Automated Cloud Deployment (+0.2 pts)
+### Automated Cloud Deployment
 
 Deployment is fully automated. Pushing to `main` triggers a GitHub Actions pipeline that builds and deploys to Cloud Run without manual intervention.
 - [`deploy.sh`](deploy.sh) - Shell script for Cloud Run deployment with Cloud SQL connection
 - [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) - GitHub Actions CI/CD pipeline
 
-### Google Developer Group Membership (+0.2 pts)
+### Google Developer Group Membership
 
 > [g.dev/casspapadopoulos](https://g.dev/casspapadopoulos)
 
@@ -396,5 +390,5 @@ This project was built for the [Gemini Live Agent Challenge](https://geminilivea
 ---
 
 <p align="center">
-  Built with 🎧 and ☕ by <a href="https://github.com/cass-p-papa">cass-p-papa</a>
+  Built with ❤️ & ⚡ for 🖼️🏛️ by <a href="https://github.com/casspapa">casspapa</a>
 </p>
