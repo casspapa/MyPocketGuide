@@ -15,9 +15,12 @@
 
 ## 📹 Demo Video
 
-**[🎬 Watch the demo →](https://www.youtube.com/watch?v=3RGetWi89Ak)**
+**[🎬 Watch the demo](https://www.youtube.com/watch?v=3RGetWi89Ak)**
 
-[0:00](https://www.youtube.com/watch?v=3RGetWi89Ak) What's Ahead · [0:08](https://www.youtube.com/watch?v=3RGetWi89Ak&t=8s) The Vision · [0:55](https://www.youtube.com/watch?v=3RGetWi89Ak&t=55s) Why It Matters · [1:45](https://www.youtube.com/watch?v=3RGetWi89Ak&t=105s) Live Demo
+> [0:00](https://www.youtube.com/watch?v=3RGetWi89Ak) What's Ahead
+> [0:08](https://www.youtube.com/watch?v=3RGetWi89Ak&t=8s) The Vision
+> [0:55](https://www.youtube.com/watch?v=3RGetWi89Ak&t=55s) Why it Matters
+> [1:45](https://www.youtube.com/watch?v=3RGetWi89Ak&t=105s) Live Demo
 
 ---
 
@@ -62,49 +65,53 @@ My Pocket Guide gives museums an AI-powered personal tour guide that works with 
 ```mermaid
 flowchart TD
     subgraph VISITOR["📱 Visitor's Phone"]
-        direction LR
-        MIC["🎤 Mic"] --> UI["Web UI"]
+        MIC["🎤 Mic"] --> UI["🌐 Web UI"]
         CAM["📷 Camera"] --> UI
         UI --> SPEAKER["🔊 Speaker"]
     end
 
-    subgraph GCR["☁️ Google Cloud Run · us-central1"]
+    UI <-->|"WebSocket bidi-stream"| FASTAPI
+
+    subgraph GCR["☁️ Cloud Run · us-central1"]
         FASTAPI["FastAPI + WebSocket Server"]
-        subgraph ADK["Google ADK Runtime"]
-            direction TB
-            CONCIERGE["🎭 Charon\nConcierge · root_agent"]
-            CONCIERGE -->|"agent transfer"| TOURGUIDE["🧭 Puck\nTour Guide · sub_agent"]
+
+        FASTAPI --> CONCIERGE
+        FASTAPI --> TOURGUIDE
+
+        subgraph ADK["ADK Runtime"]
+            CONCIERGE["🎭 Charon · Concierge"]
+            CONCIERGE -->|"agent transfer"| TOURGUIDE["🧭 Puck · Tour Guide"]
         end
+
         subgraph TOOLS["Agent Tools"]
-            direction LR
             PROFILE["save_visitor_profile"]
             IDENTIFY["identify_exhibit"]
             RAGTOOL["rag_search"]
         end
-        FASTAPI --> ADK
-        CONCIERGE -.->|uses| PROFILE
-        TOURGUIDE -.->|uses| IDENTIFY
-        TOURGUIDE -.->|uses| RAGTOOL
+
+        CONCIERGE -.-> PROFILE
+        TOURGUIDE -.-> IDENTIFY
+        TOURGUIDE -.-> RAGTOOL
     end
+
+    ADK <-->|"Bidi-streaming"| GEMINI
+    RAGTOOL -->|"Cross-region lookup"| RAG
+    ADK <-->|"Sessions"| CLOUDSQL
 
     subgraph GCP["☁️ Google Cloud Platform"]
-        direction LR
-        GEMINI["🧠 Gemini Live 2.5 Flash\nus-central1\nAudio + Vision"]
-        RAG["📚 Vertex AI RAG\nus-west1\n16 Exhibit Files"]
-        CLOUDSQL[("🗄️ Cloud SQL\nus-central1\nSessions")]
+        GEMINI["🧠 Gemini Live 2.5 Flash"]
+        RAG["📚 Vertex AI RAG Engine"]
+        CLOUDSQL[("🗄️ Cloud SQL")]
     end
-
-    UI <-->|"WebSocket bidi-stream\nPCM audio + JPEG frames"| FASTAPI
-    ADK <-->|"Bidi-streaming\naudio + vision + text"| GEMINI
-    RAGTOOL -->|"Cross-region lookup"| RAG
-    ADK <--> CLOUDSQL
 
     style VISITOR fill:#E8F5E9,stroke:#2E7D32,stroke-width:2px,color:#1B5E20
     style GCR fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#0D47A1
     style GCP fill:#FFF3E0,stroke:#E65100,stroke-width:2px,color:#BF360C
     style ADK fill:#FFFDE7,stroke:#F9A825,stroke-width:1px
     style TOOLS fill:#FFFDE7,stroke:#F9A825,stroke-width:1px
-    style GEMINI fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px
+    style GEMINI fill:#F3E5F5,stroke:#7B1FA2,stroke-width:1px
+    style RAG fill:#F3E5F5,stroke:#7B1FA2,stroke-width:1px
+    style CLOUDSQL fill:#F3E5F5,stroke:#7B1FA2,stroke-width:1px
 ```
 
 ### Agent Flow
@@ -357,7 +364,7 @@ No third-party datasets or content were used. All 16 exhibit markdown files are 
 
 ### [Try it live → museum-tour-guide-912042965719.us-central1.run.app](https://museum-tour-guide-912042965719.us-central1.run.app)
 
-For a walkthrough of the Cloud Run service, Cloud SQL instance, and Vertex AI RAG corpus running in the Google Cloud Console, see the [deployment proof recording](PLACEHOLDER_RECORDING_LINK).
+For a walkthrough of the Cloud Run service, Cloud SQL instance, and Vertex AI RAG corpus running in the Google Cloud Console, see the [deployment proof recording](https://github.com/casspapa/MyPocketGuide/blob/main/hackathon-submission-items/deployment-evidence.mp4).
 
 Key files demonstrating Google Cloud integration:
 - [`deploy.sh`](deploy.sh) - Cloud Run deployment with Cloud SQL integration
