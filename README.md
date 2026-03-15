@@ -29,7 +29,7 @@
 
 **[→ Open My Pocket Guide](https://museum-tour-guide-912042965719.us-central1.run.app)**
 
-Open the link on your phone in **Chrome** (the only supported browser). Allow microphone and camera access when prompted. The concierge will greet you by voice. Tell it your name and a few specific interests, then switch to the camera view. 
+Open the link on your phone in **Chrome** (the only supported browser). Allow microphone and camera access when prompted. The concierge will greet you by voice. Tell it your name and a few specific interests, then switch to the camera view. Note: Loading may take up to 30 seconds. Please wait for the green button to display before entering the app.
 
 > See the [Exhibit Gallery](hackathon-submission-items/Exhibit-Gallery.md) for full-size images to point your camera at. Works best in a quiet environment with headphones.
  
