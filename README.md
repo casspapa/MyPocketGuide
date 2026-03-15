@@ -28,7 +28,9 @@
 
 **[→ Open My Pocket Guide](https://museum-tour-guide-912042965719.us-central1.run.app)**
 
-Open the link on your phone (Chrome recommended). Allow microphone and camera access when prompted. The concierge will greet you by voice. Tell it your name and a few specific interests, then switch to the camera view and point it at one of the exhibit images in the Galleries section below. Works best in a quiet environment with headphones.
+> See the [Exhibit Gallery](https://github.com/casspapa/MyPocketGuide/blob/main/hackathon-submission-items/Exhibit-Gallery.md) for full-size images to point your camera at.
+
+Open the link on your phone (Chrome browser supported only). Allow microphone and camera access when prompted. The concierge will greet you by voice. Tell it your name and a few specific interests, then switch to the camera view and point it at one of the exhibit images in the Galleries section below. Works best in a quiet environment with headphones.
 
 You're not limited to exhibits either. Point the camera at your dog, your coffee mug, or anything around you and ask Puck what it sees. The vision works on anything, the RAG grounding only kicks in when it recognises a known exhibit.
 
@@ -229,8 +231,6 @@ my-pocket-guide/
 │   ├── ingest.py                # RAG corpus ingestion
 │   ├── dedup_rag.py             # Remove duplicate RAG files
 │   └── add_visual_ids.py        # Patch exhibit files with visual keywords
-├── tests/
-│   └── test_rag.py              # RAG integration tests
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml           # CI/CD, auto-deploy on push to main
