@@ -6,6 +6,7 @@
 ![Gemini Live](https://img.shields.io/badge/Gemini_Live-2.5_Flash_Native_Audio-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
 ![Cloud Run](https://img.shields.io/badge/Cloud_Run-us--central1-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
 ![Vertex AI](https://img.shields.io/badge/Vertex_AI-RAG_Engine-34A853?style=for-the-badge&logo=googlecloud&logoColor=white)
+![Cloud SQL](https://img.shields.io/badge/Cloud_SQL-PostgreSQL-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-WebSocket-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 
@@ -28,11 +29,16 @@
 
 **[→ Open My Pocket Guide](https://museum-tour-guide-912042965719.us-central1.run.app)**
 
-> See the [Exhibit Gallery](https://github.com/casspapa/MyPocketGuide/blob/main/hackathon-submission-items/Exhibit-Gallery.md) for full-size images to point your camera at.
+Open the link on your phone in **Chrome** (the only supported browser). Allow microphone and camera access when prompted. The concierge will greet you by voice. Tell it your name and a few specific interests, then switch to the camera view. 
 
-Open the link on your phone (Chrome browser supported only). Allow microphone and camera access when prompted. The concierge will greet you by voice. Tell it your name and a few specific interests, then switch to the camera view and point it at one of the exhibit images in the Galleries section below. Works best in a quiet environment with headphones.
-
+> See the [Exhibit Gallery](hackathon-submission-items/Exhibit-Gallery.md) for full-size images to point your camera at. Works best in a quiet environment with headphones.
+ 
 You're not limited to exhibits either. Point the camera at your dog, your coffee mug, or anything around you and ask Puck what it sees. The vision works on anything, the RAG grounding only kicks in when it recognises a known exhibit.
+ 
+**Supported devices:**
+- Android phones (Chrome 66+, Android 8.0+) ✅
+- Desktop/laptop (Chrome 66+) ✅ for testing, though the experience is designed for mobile.
+- iPhone (Chrome for iOS) ✅ Works, but may have audio issues. To be resolved in next release.
 
 ---
 
@@ -194,7 +200,7 @@ sequenceDiagram
 
 ## 🖼️ Galleries & Exhibits
 
-Five themed galleries with 17 canonical exhibits:
+Five themed galleries with 17 canonical exhibits. See the [Exhibit Gallery](hackathon-submission-items/Exhibit-Gallery.md) for full-size images you can point your camera at.
 
 | Gallery | Theme | Exhibits |
 |---------|-------|----------|
@@ -224,6 +230,7 @@ my-pocket-guide/
 │   ├── index.html               # Single-page app
 │   └── js/
 │       ├── audio-player.js      # AudioWorklet for PCM playback
+│       ├── audio-recorder.js    # AudioWorklet for mic capture + downsampling
 │       └── pcm-player-processor.js
 ├── data/
 │   └── exhibits/                # 17 exhibit markdown files (RAG source)
@@ -249,7 +256,8 @@ my-pocket-guide/
 - Python 3.12+
 - Google Cloud project with billing enabled
 - `gcloud` CLI authenticated (`gcloud auth login`)
-- APIs enabled: Cloud Run, Cloud SQL Admin, Vertex AI, Secret Manager
+- APIs enabled: Cloud Run, Cloud SQL Admin, Vertex AI, Artifact Registry, Secret Manager
+- reCAPTCHA v3 keys from [google.com/recaptcha/admin](https://www.google.com/recaptcha/admin)
 
 ### 1. Clone & install
 
@@ -284,18 +292,26 @@ gcloud sql users create museum_user --instance=museum-db --password=YOUR_PASSWOR
 ### 4. Ingest exhibit data into Vertex AI RAG
 
 ```bash
-# First run: creates corpus and ingests all 17 exhibit files
+# Patch exhibit files with visual identification sections (safe to run multiple times)
+python3 scripts/add_visual_ids.py
+
+# Create the RAG corpus and ingest all 17 exhibit files
 python3 scripts/ingest.py
 
 # Copy the RAG_CORPUS value printed at the end into your .env
+
+# If you re-ingest and get duplicates, run:
+python3 scripts/dedup_rag.py
 ```
 
 ### 5. Run locally
 
 ```bash
-# Requires Cloud SQL proxy or a local PostgreSQL instance
-# Set DATABASE_URL in .env to point to local DB
+# Start the Cloud SQL Auth Proxy in a separate terminal
+# Install: https://cloud.google.com/sql/docs/postgres/connect-auth-proxy
+cloud-sql-proxy your-project:us-central1:museum-db
 
+# Then run the app
 uvicorn backend.main:app --host 0.0.0.0 --port 8080 --reload
 # Open http://localhost:8080
 ```
