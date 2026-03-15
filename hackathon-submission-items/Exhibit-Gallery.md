@@ -1,5 +1,7 @@
 # 🖼️ My Pocket Guide — Exhibit Gallery
 
+> All exhibit images sourced from [Wikimedia Commons](https://commons.wikimedia.org/) under their respective Creative Commons licenses.
+
 Open this page on a screen, then point your phone camera at any image to test the app.
 
 **[→ Open My Pocket Guide](https://museum-tour-guide-912042965719.us-central1.run.app)**
@@ -9,29 +11,29 @@ Open this page on a screen, then point your phone camera at any image to test th
 ## 🦕 Echoes of the Deep — Prehistoric Earth
 
 ### Hope the Blue Whale
-![Hope the Blue Whale](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Blue_Whale_skeleton_%28Balaenoptera_musculus%29_-_Natural_History_Museum%2C_London_-_DSC09498.JPG/800px-Blue_Whale_skeleton_%28Balaenoptera_musculus%29_-_Natural_History_Museum%2C_London_-_DSC09498.JPG)
+![Hope the Blue Whale](https://commons.wikimedia.org/wiki/File:Blue_Whale_-_Natural_History_Museum,_London_-_Joy_of_Museums.jpg#/media/File:Blue_Whale_-_Natural_History_Museum,_London_-_Joy_of_Museums.jpg)
 
 ### Dippy the Diplodocus
-![Dippy the Diplodocus](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Diplodocus_%28replica%29_-_Natural_History_Museum%2C_London_-_DSC09476.JPG/800px-Diplodocus_%28replica%29_-_Natural_History_Museum%2C_London_-_DSC09476.JPG)
+![Dippy the Diplodocus](https://commons.wikimedia.org/wiki/File:CM_Diplodocus.jpg#/media/File:CM_Diplodocus.jpg)
 
 ### The Coelacanth
-![The Coelacanth](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/CoesAq.jpg/800px-CoesAq.jpg)
+![The Coelacanth](https://commons.wikimedia.org/wiki/File:Coelacanth_specimen_NHM.jpg#/media/File:Coelacanth_specimen_NHM.jpg)
 
 ---
 
 ## 🏛️ Marble & Myth — Ancient Greece
 
 ### Caryatid of the Erechtheion
-![Caryatid](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Erechtheum_caryatid_%28British_Museum%29.jpg/500px-Erechtheum_caryatid_%28British_Museum%29.jpg)
+![Caryatid](https://commons.wikimedia.org/wiki/File:Cariatide_dall%27eretteo,_415_ac._02.JPG#/media/File:Cariatide_dall'eretteo,_415_ac._02.JPG)
 
 ### The Parthenon Frieze
-![Parthenon Frieze](https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Elgin_Marbles_British_Museum.jpg/800px-Elgin_Marbles_British_Museum.jpg)
+![Parthenon Frieze](https://commons.wikimedia.org/wiki/File:Parthenon_Frieze.JPG#/media/File:Parthenon_Frieze.JPG)
 
 ### The Antikythera Mechanism
 ![Antikythera Mechanism](https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/NAMA_Machine_d%27Anticyth%C3%A8re_1.jpg/500px-NAMA_Machine_d%27Anticyth%C3%A8re_1.jpg)
 
 ### Diana of Versailles
-![Diana of Versailles](https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Diane_de_Versailles_Leochares_2.jpg/500px-Diane_de_Versailles_Leochares_2.jpg)
+![Diana of Versailles](https://commons.wikimedia.org/wiki/File:Diane_de_Versailles_-_Mus%C3%A9e_du_Louvre_AGER_Ma_589.jpg#/media/File:Diane_de_Versailles_-_Mus%C3%A9e_du_Louvre_AGER_Ma_589.jpg)
 
 ---
 
